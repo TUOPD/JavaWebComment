@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.Mapper.PersonMapper">
+
+    <select id="selectByQueryDTO" resultType="org.example.Comment.pojo.Person">
+        SELECT * FROM person
+        <where>
+            <if test="query.username != null and query.username != ''">
+                AND username LIKE CONCAT('%', #{query.username}, '%')
+            </if>
+            <if test="query.telephone != null and query.telephone != 0">
+                AND telephone = #{query.telephone}
+            </if>
+            <if test="query.age != null and query.age != 0">
+                AND age = #{query.age}
+            </if>
+            <if test="query.isCompany == true">
+                AND is_company = 1
+            </if>
+            <if test="query.isCompany == false">
+                AND is_company = 0
+            </if>
+            <if test="query.inCompanytimemin != null">
+                AND date(in_companytime) &gt;= #{query.inCompanytimemin}
+            </if>
+            <if test="query.inCompanytimemax != null">
+                AND date(in_companytime) &lt;= #{query.inCompanytimemax}
+            </if>
+        </where>
+    </select>
+
+</mapper>
