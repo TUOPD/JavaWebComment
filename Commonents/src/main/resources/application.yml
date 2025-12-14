@@ -15,6 +15,15 @@ spring:
     url: jdbc:mysql://localhost:3306/Comment
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs  # 接口描述JSON的路径
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html # 原生Swagger UI地址
+  # 配置需要扫描的包路径，避免扫描到Spring框架内部的接口
+  packages-to-scan: org.example.Controller
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
